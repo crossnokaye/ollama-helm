@@ -8,6 +8,35 @@ entries:
           description: clear default limits and requests in resources definition
     apiVersion: v2
     appVersion: 0.1.30
+    created: "2024-04-05T17:50:02.891944876Z"
+    description: Get up and running with large language models locally.
+    digest: 5ee5be6396f951ea5e769071596a3763677f8fd138cca9a3421305dd12b2fbdf
+    home: https://ollama.ai/
+    icon: https://ollama.ai/public/ollama.png
+    keywords:
+    - ai
+    - llm
+    - llama
+    - mistral
+    kubeVersion: ^1.16.0-0
+    maintainers:
+    - email: tech@outworld.fr
+      name: Outworld
+    name: ollama
+    sources:
+    - https://github.com/ollama/ollama
+    - https://github.com/otwld/ollama-helm
+    type: application
+    urls:
+    - https://github.com/crossnokaye/ollama-helm/releases/download/ollama-0.22.2/ollama-0.22.2.tgz
+    version: 0.22.2
+  - annotations:
+      artifacthub.io/category: ai-machine-learning
+      artifacthub.io/changes: |
+        - kind: changed
+          description: clear default limits and requests in resources definition
+    apiVersion: v2
+    appVersion: 0.1.30
     created: "2024-04-05T17:44:05.643302259Z"
     description: Get up and running with large language models locally.
     digest: 43414f9970643ecce5d75b271f600b0c30d8f537e4d035bae85409b43b30482a
@@ -59,4 +88,4 @@ entries:
     urls:
     - https://github.com/crossnokaye/ollama-helm/releases/download/ollama-0.22.0/ollama-0.22.0.tgz
     version: 0.22.0
-generated: "2024-04-05T17:44:05.643314311Z"
+generated: "2024-04-05T17:50:02.891962499Z"
