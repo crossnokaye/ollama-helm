@@ -62,7 +62,7 @@ Create the name of the service account to use
 {{- end }}
 
 {{/*
-Create the model list
+Create the included model list
 */}}
 {{- define "ollama.modelList" -}}
 {{- $modelList := default list}}

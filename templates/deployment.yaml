@@ -105,11 +105,25 @@ spec:
             successThreshold: {{ .Values.readinessProbe.successThreshold }}
             failureThreshold: {{ .Values.readinessProbe.failureThreshold }}
           {{- end }}
-          {{- if or .Values.ollama.models .Values.ollama.defaultModel }}
+          {{- if or .Values.ollama.models .Values.ollama.defaultModel .Values.ollama.customModels }}
           lifecycle:
             postStart:
               exec:
-                command: [ "/bin/sh", "-c", "{{- printf "echo %s | xargs -n1 /bin/ollama pull %s" (include "ollama.modelList" .) (ternary "--insecure" "" .Values.ollama.insecure)}}" ]
+                command:
+                - "/bin/sh"
+                - "-c"
+                - >
+                  apt-get update && apt-get install wget -y
+                  mkdir -p /models
+                {{- if or .Values.ollama.models .Values.ollama.defaultModel }}
+                  {{ printf "echo %s | xargs -n1 /bin/ollama pull %s" (include "ollama.modelList" .) (ternary "--insecure" "" .Values.ollama.insecure)}}
+                {{- end }}
+                {{- range $m := .Values.ollama.customModels }}
+                {{- $filename := splitList "/" $m.url | last }}
+                  wget --no-verbose --show-progress --progress=dot:mega -O /models/{{ $filename }} {{ $m.url }}
+                  echo "FROM /models/{{ $filename }}" > /models/Modelfile-{{ $filename }}
+                  /bin/ollama create {{ $m.name }} -f Modelfile-{{ $filename }}
+                {{- end }}
           {{- end }}
       volumes:
         - name: ollama-data

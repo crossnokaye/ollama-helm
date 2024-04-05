@@ -47,6 +47,16 @@ ollama:
   #  - mistral
   models: {}
 
+  # -- List of custom models to pull and install at container startup
+  # Similar to the above, the more you have, the longer the container will take to start
+  # This expects a dictionary with the keys "name" (for the name to import the
+  # model as inside Ollama) and "uri" (which is the location where the custom
+  # model's gguf file is located, probably huggingface somewhere)
+  # customModels:
+  # - name: ggml-gritlm-7b:q4_0
+  #   url: https://huggingface.co/dranger003/GritLM-7B-GGUF/resolve/main/ggml-gritlm-7b-q4_k.gguf
+  customModels: {}
+
   # -- Add insecure flag for pulling at container startup
   insecure: false
 
