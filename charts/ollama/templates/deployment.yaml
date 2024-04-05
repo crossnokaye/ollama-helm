@@ -122,7 +122,7 @@ spec:
                 {{- $filename := splitList "/" $m.url | last }}
                   wget --no-verbose --show-progress --progress=dot:mega -O /models/{{ $filename }} {{ $m.url }};
                   echo "FROM /models/{{ $filename }}" > /models/Modelfile-{{ $filename }};
-                  /bin/ollama create {{ $m.name }} -f Modelfile-{{ $filename }};
+                  /bin/ollama create {{ $m.name }} -f /models/Modelfile-{{ $filename }};
                 {{- end }}
           {{- end }}
       volumes:
