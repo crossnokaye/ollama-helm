@@ -113,16 +113,16 @@ spec:
                 - "/bin/sh"
                 - "-c"
                 - >
-                  apt-get update && apt-get install wget -y
-                  mkdir -p /models
+                  apt-get update && apt-get install wget -y;
+                  mkdir -p /models;
                 {{- if or .Values.ollama.models .Values.ollama.defaultModel }}
-                  {{ printf "echo %s | xargs -n1 /bin/ollama pull %s" (include "ollama.modelList" .) (ternary "--insecure" "" .Values.ollama.insecure)}}
+                  {{ printf "echo %s | xargs -n1 /bin/ollama pull %s" (include "ollama.modelList" .) (ternary "--insecure" "" .Values.ollama.insecure)}};
                 {{- end }}
                 {{- range $m := .Values.ollama.customModels }}
                 {{- $filename := splitList "/" $m.url | last }}
-                  wget --no-verbose --show-progress --progress=dot:mega -O /models/{{ $filename }} {{ $m.url }}
-                  echo "FROM /models/{{ $filename }}" > /models/Modelfile-{{ $filename }}
-                  /bin/ollama create {{ $m.name }} -f Modelfile-{{ $filename }}
+                  wget --no-verbose --show-progress --progress=dot:mega -O /models/{{ $filename }} {{ $m.url }};
+                  echo "FROM /models/{{ $filename }}" > /models/Modelfile-{{ $filename }};
+                  /bin/ollama create {{ $m.name }} -f Modelfile-{{ $filename }};
                 {{- end }}
           {{- end }}
       volumes:
